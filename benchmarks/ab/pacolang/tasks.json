@@ -1,0 +1,119 @@
+{
+  "repo": "paco",
+  "baseCommit": "d1909c5",
+  "prepare": "dest=\"$PWD\"; (cd \"$WORKSPACE/paco\" && find runtime/target -name libpaco_runtime_ffi.a -path \"*release*\" -not -path \"*/deps/*\") | while read -r f; do mkdir -p \"$dest/$(dirname \"$f\")\" && cp \"$WORKSPACE/paco/$f\" \"$dest/$f\"; done",
+  "prepareNote": "The runtime archive needs a musl cross toolchain to build; it is copied from the workspace, whose runtime/ sources equal the base commit's.",
+  "openspecChanges": "../openspec/changes",
+  "setupA": {
+    "modules": "--all",
+    "settings": {
+      "quality": {
+        "commands": {
+          "typecheck": "make check",
+          "lint": "make clippy",
+          "test": "make test"
+        }
+      }
+    }
+  },
+  "regression": "cargo test --manifest-path compiler/Cargo.toml --workspace -q",
+  "tasks": [
+    {
+      "id": "F1",
+      "level": "easy",
+      "change": "numeric-literal-forms-and-bitwise-ops",
+      "scope": "task 1.1 only",
+      "accept": [
+        {
+          "kind": "run",
+          "file": "F1/literals.paco",
+          "stdout": "255\n15\n10\n1000000"
+        },
+        {
+          "kind": "check-fails",
+          "file": "F1/bad_binary_digit.paco",
+          "match": "binary"
+        }
+      ]
+    },
+    {
+      "id": "F2",
+      "level": "easy",
+      "change": "vec-index-assignment",
+      "scope": "section 1 (tasks 1.1 and 1.2) only",
+      "accept": [
+        {
+          "kind": "check-ok",
+          "file": "F2/index_mut_call.paco"
+        },
+        {
+          "kind": "cmd",
+          "cmd": "python3 scripts/check_docs_consistency.py"
+        }
+      ]
+    },
+    {
+      "id": "F3",
+      "level": "easy",
+      "change": "ffi-link-attribute",
+      "scope": "task 1.1 only",
+      "accept": [
+        {
+          "kind": "check-ok",
+          "file": "F3/link_libm.paco"
+        },
+        {
+          "kind": "check-fails",
+          "file": "F3/link_unknown_key.paco",
+          "match": "nme|unknown|key"
+        },
+        {
+          "kind": "check-fails",
+          "file": "F3/link_unknown_kind.paco",
+          "match": "kind|weird"
+        }
+      ]
+    },
+    {
+      "id": "M1",
+      "level": "medium",
+      "change": "spawn-argument-moves",
+      "scope": "all tasks (1.1, 1.2 and 2.1)",
+      "accept": [
+        {
+          "kind": "run",
+          "file": "M1/spawn_arc_clone_argument.paco",
+          "stdout": "1"
+        },
+        {
+          "kind": "check-fails",
+          "file": "M1/spawn_moves_local.paco",
+          "match": "moved value `s`"
+        },
+        {
+          "kind": "check-fails",
+          "file": "M1/spawn_closure_moves_capture.paco",
+          "match": "moved value `s`"
+        }
+      ]
+    },
+    {
+      "id": "G1",
+      "level": "medium",
+      "change": "generic-cell-element-layout",
+      "scope": "tasks 1.1 and 1.2 (reproduce the crash as a failing test, then fix it)",
+      "accept": [
+        {
+          "kind": "run",
+          "file": "G1/mutex_of_vec.paco",
+          "stdout": "0"
+        },
+        {
+          "kind": "run",
+          "file": "G1/arc_mutex_vec_shared.paco",
+          "stdout": "1"
+        }
+      ]
+    }
+  ]
+}

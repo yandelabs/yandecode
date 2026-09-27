@@ -1,0 +1,5 @@
+fn main() {
+    let m: Mutex<Vec<i64>> = Mutex::new(Vec::new());
+    let v: Vec<i64> = m.lock();
+    print(v.len());
+}

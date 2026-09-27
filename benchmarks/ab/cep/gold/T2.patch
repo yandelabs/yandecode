@@ -1,0 +1,25 @@
+diff --git a/internal/domain/postalcode/postal_code_region.go b/internal/domain/postalcode/postal_code_region.go
+new file mode 100644
+index 0000000..309b5e3
+--- /dev/null
++++ b/internal/domain/postalcode/postal_code_region.go
+@@ -0,0 +1,19 @@
++package postalcode
++
++// regionByStateCode maps each Brazilian state code (UF) to its macro-region.
++var regionByStateCode = map[string]string{
++	"AC": "Norte", "AP": "Norte", "AM": "Norte", "PA": "Norte",
++	"RO": "Norte", "RR": "Norte", "TO": "Norte",
++	"AL": "Nordeste", "BA": "Nordeste", "CE": "Nordeste", "MA": "Nordeste",
++	"PB": "Nordeste", "PE": "Nordeste", "PI": "Nordeste", "RN": "Nordeste", "SE": "Nordeste",
++	"DF": "Centro-Oeste", "GO": "Centro-Oeste", "MT": "Centro-Oeste", "MS": "Centro-Oeste",
++	"ES": "Sudeste", "MG": "Sudeste", "RJ": "Sudeste", "SP": "Sudeste",
++	"PR": "Sul", "RS": "Sul", "SC": "Sul",
++}
++
++// RegionForState returns the macro-region name for a Brazilian state code.
++// The lookup is case-sensitive and expects the two-letter uppercase UF.
++// Unknown or empty codes return the empty string.
++func RegionForState(stateCode string) string {
++	return regionByStateCode[stateCode]
++}

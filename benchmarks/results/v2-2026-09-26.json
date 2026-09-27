@@ -1,0 +1,75 @@
+{
+  "timestamp": "2026-09-26T21:27:30.246Z",
+  "commit": "f963e38",
+  "node": "v22.22.3",
+  "retrieval": {
+    "queries": 12,
+    "recallAt1": 0.8333333333333334,
+    "recallAt5": 1,
+    "recallAt10": 1,
+    "mrr": 0.8958333333333334,
+    "returnedTokensTotal": 4092,
+    "latencyMsP50": 1
+  },
+  "findImplementation": {
+    "files": 141,
+    "symbols": 617,
+    "fullIndexMs": 1069,
+    "noopSyncMs": 10,
+    "indexedFiles": 141,
+    "top1": 1,
+    "lookupMsP50": 0.12,
+    "definitionTokens": 2593,
+    "wholeFileTokens": 15171
+  },
+  "outputIsolation": {
+    "producedTokens": 197235,
+    "returnedTokens": 440,
+    "reductionPct": 99.78,
+    "failureShown": true,
+    "exactLineRecoverable": true,
+    "elapsedMs": 166
+  },
+  "memoryRecall": {
+    "memories": 55,
+    "recallAt3": 0.8,
+    "avgSearchTokens": 85,
+    "sessionStartTokens": 748
+  },
+  "libraryDocs": {
+    "versionReported": true,
+    "answersQuestion": true,
+    "returnedTokens": 995,
+    "firstQueryMs": 144,
+    "warmQueryMs": 3
+  },
+  "hookLatency": {
+    "preToolUseBashP50Ms": 73,
+    "postToolUseEditP50Ms": 84,
+    "sessionStartP50Ms": 89,
+    "userPromptSubmitP50Ms": 90
+  },
+  "schemaCostTokens": {
+    "code": 707,
+    "lsp": 442,
+    "context": 600,
+    "knowledge": 661,
+    "libdocs": 244,
+    "quality": 162,
+    "workflow": 495,
+    "instructions": 111,
+    "defaultModulesTotal": 2976,
+    "allModulesTotal": 3417
+  },
+  "rssMb": 165,
+  "gates": {
+    "recall@5 ≥ v0": true,
+    "MRR ≥ v0": true,
+    "find implementation top-1 ≥ 0.9": true,
+    "output digest shows the failure": true,
+    "output fully recoverable": true,
+    "memory recall@3 ≥ 0.8": true,
+    "libdocs reports installed version": true,
+    "PreToolUse p50 < 150 ms": true
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "repo": "cep-api",
+  "module": "github.com/whoisclebs/cep-api",
+  "baseNote": "ab-base is a frozen snapshot of the cep-api working tree (an in-progress restructure not yet committed), copied into <work> and committed there. It is not any upstream commit.",
+  "tasks": [
+    {
+      "id": "T1",
+      "kind": "bug",
+      "level": "easy",
+      "setup": "setup/T1.patch",
+      "testPackages": ["internal/domain/postalcode"],
+      "prompt": "Invalid postal codes are being accepted. `StrictValidate` (in internal/domain/postalcode) is meant to accept only two forms: eight bare digits (NNNNNNNN) or the conventional NNNNN-NNN mask. Right now inputs with a wrong separator or an extra character between the two groups (for example \"12345 678\", \"12345.678\", \"12345a678\") pass validation and reach the repository. Find the root cause and fix it so only the two intended forms are accepted."
+    },
+    {
+      "id": "T2",
+      "kind": "feature",
+      "level": "easy",
+      "testPackages": ["internal/domain/postalcode"],
+      "prompt": "Add a pure function `RegionForState(stateCode string) string` to the `postalcode` domain package (internal/domain/postalcode) that returns the Brazilian macro-region for a two-letter uppercase state code (UF): one of \"Norte\", \"Nordeste\", \"Centro-Oeste\", \"Sudeste\" or \"Sul\". Map all 27 UFs. Unknown or empty codes return the empty string; the lookup is case-sensitive (lowercase input returns \"\")."
+    },
+    {
+      "id": "T3",
+      "kind": "refactor",
+      "level": "easy",
+      "testPackages": ["internal/httpapi/dto", "internal/httpapi"],
+      "prompt": "The base URL path \"/v1/postal-codes\" is duplicated as a string literal in two places: the route registration in internal/httpapi/postal_code_handler.go and the self-link built in internal/httpapi/dto/postal_code_response.go. Introduce a single exported constant `PostalCodeBasePath` in the `dto` package (value \"/v1/postal-codes\") and derive both the route and the self-link href from it, with no behaviour change. All existing tests must stay green."
+    }
+  ]
+}

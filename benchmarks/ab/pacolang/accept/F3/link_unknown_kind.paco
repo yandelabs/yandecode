@@ -1,0 +1,8 @@
+#[link(name = "m", kind = "weird")]
+extern "C" {
+    fn cbrt(x: f64) -> f64;
+}
+
+fn main() {
+    print(unsafe { cbrt(27.0) });
+}

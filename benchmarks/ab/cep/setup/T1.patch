@@ -1,0 +1,24 @@
+diff --git a/internal/domain/postalcode/postal_code_normalization.go b/internal/domain/postalcode/postal_code_normalization.go
+index 5bb2cb8..c84e113 100644
+--- a/internal/domain/postalcode/postal_code_normalization.go
++++ b/internal/domain/postalcode/postal_code_normalization.go
+@@ -10,7 +10,7 @@ var (
+ 	// reDigitsOnly matches exactly eight decimal digits.
+ 	reDigitsOnly = regexp.MustCompile(`^\d{8}$`)
+ 	// reMasked matches the conventional NNNNN-NNN form.
+-	reMasked = regexp.MustCompile(`^\d{5}-\d{3}$`)
++	reMasked = regexp.MustCompile(`^\d{5}.\d{3}$`)
+ )
+ 
+ // ErrInvalidPostalCode is the single domain-level sentinel returned when
+@@ -43,8 +43,8 @@ func Normalize(raw string) string {
+ // StrictValidate checks that raw is either exactly eight decimal digits
+ // or the conventional NNNNN-NNN mask. Unlike Normalize (which extracts
+ // digits from arbitrary input), this rejects punctuation and letters.
+-// This is the HTTP-boundary validator — dots, spaces, and arbitrary
+-// characters cause rejection.
++// This is the service/domain validation boundary — dots, spaces, and
++// arbitrary characters cause rejection.
+ func StrictValidate(raw string) error {
+ 	trimmed := strings.TrimSpace(raw)
+ 	if reDigitsOnly.MatchString(trimmed) || reMasked.MatchString(trimmed) {

@@ -1,0 +1,11 @@
+fn bump(m: Arc<Mutex<i64>>) {
+    let before = m.get().lock();
+    m.get().set(before + 1);
+}
+
+fn main() {
+    let m = Arc::new(Mutex::new(0));
+    let h = spawn bump(m.clone());
+    let done = h.join();
+    print(m.get().lock());
+}

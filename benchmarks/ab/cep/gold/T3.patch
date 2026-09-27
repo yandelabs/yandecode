@@ -1,0 +1,37 @@
+diff --git a/internal/httpapi/dto/postal_code_response.go b/internal/httpapi/dto/postal_code_response.go
+index bb80d44..1053368 100644
+--- a/internal/httpapi/dto/postal_code_response.go
++++ b/internal/httpapi/dto/postal_code_response.go
+@@ -53,6 +53,10 @@ type PostalCodeResponse struct {
+ 	Links               PostalCodeLinks    `json:"_links"`
+ }
+ 
++// PostalCodeBasePath is the URL prefix under which postal code resources
++// are served. Both the route registration and the self-link derive from it.
++const PostalCodeBasePath = "/v1/postal-codes"
++
+ // NewPostalCodeResponse constructs a DTO from a domain PostalCodeRecord.
+ func NewPostalCodeResponse(record postalcode.PostalCodeRecord) *PostalCodeResponse {
+ 	return &PostalCodeResponse{
+@@ -81,7 +85,7 @@ func NewPostalCodeResponse(record postalcode.PostalCodeRecord) *PostalCodeRespon
+ 		},
+ 		Links: PostalCodeLinks{
+ 			Self: PostalCodeSelfLink{
+-				Href: "/v1/postal-codes/" + record.PostalCode,
++				Href: PostalCodeBasePath + "/" + record.PostalCode,
+ 			},
+ 		},
+ 	}
+diff --git a/internal/httpapi/postal_code_handler.go b/internal/httpapi/postal_code_handler.go
+index 62abf09..efa6753 100644
+--- a/internal/httpapi/postal_code_handler.go
++++ b/internal/httpapi/postal_code_handler.go
+@@ -24,7 +24,7 @@ func NewPostalCodeHandler(s service.PostalCodeService) *PostalCodeHandler {
+ 
+ // Register mounts all routes on the given Golpher app.
+ func (h *PostalCodeHandler) Register(app *golpher.App) {
+-	app.GET("/v1/postal-codes/:postal_code", h.handleLookup)
++	app.GET(dto.PostalCodeBasePath+"/:postal_code", h.handleLookup)
+ 	app.GET("/healthz", h.handleHealthz)
+ 	app.GET("/readyz", h.handleReadyz)
+ }

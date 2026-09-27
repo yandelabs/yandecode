@@ -1,0 +1,58 @@
+{
+  "model": "claude-haiku-4-5-20251001",
+  "claudeVersion": "2.1.283 (Claude Code)",
+  "checks": {
+    "mcpConnected": true,
+    "toolsDiscovered": 25,
+    "usedCodeSearch": true,
+    "usedCtxRun": true,
+    "usedMemoryWrite": true,
+    "foundUserRepository": true,
+    "decisionFileWritten": true,
+    "sessionSummaryFromHooks": true,
+    "recalledInNewSession": true
+  },
+  "sessions": [
+    {
+      "exitCode": 0,
+      "mcpServers": [
+        {
+          "name": "yandecode",
+          "status": "connected",
+          "source": "dynamic"
+        }
+      ],
+      "yandecodeToolsAvailable": 25,
+      "toolsCalled": [
+        "ToolSearch",
+        "mcp__yandecode__code_search",
+        "mcp__yandecode__ctx_run",
+        "mcp__yandecode__memory_write"
+      ],
+      "answer": "✅ Tarefas concluídas:\n\n**Arquivo (passo 1):** `src/users/UserRepository.ts`\n\nA função é `UserRepository.findOrCreateBySso` (linhas 36-48), que cria ou encontra um usuário durante login SSO.\n\n**ID da Memória (passo 3):** `20260926-sessions-use-opaque-tokens-not-jwt`\n\nA decisão dura foi registrada sobre o uso de tokens opacos em vez de JWT, com referência ao ADR.",
+      "costUsd": 0.051692699999999994
+    },
+    {
+      "exitCode": 0,
+      "mcpServers": [
+        {
+          "name": "yandecode",
+          "status": "connected",
+          "source": "dynamic"
+        }
+      ],
+      "yandecodeToolsAvailable": 25,
+      "toolsCalled": [],
+      "answer": "De acordo com o contexto do projeto fornecido no início da conversa:\n\n**Decisão**: Sessions usam opaque tokens, não JWT.\n\n**ID da memória**: `20260926-sessions-use-opaque-tokens-not-jwt`",
+      "costUsd": 0.0277581
+    }
+  ],
+  "memoryFiles": [
+    "20260926-session-2026-09-26-21-25-1-command-s.md",
+    "20260926-sessions-use-opaque-tokens-not-jwt.md"
+  ],
+  "managedMemory": [
+    "---\nid: 20260926-session-2026-09-26-21-25-1-command-s\ntitle: \"Session 2026-09-26 21:25: 1 command(s)\"\nkind: session\ndurability: ephemeral\ncreated: 2026-09-26T21:25:06.203Z\nupdated: 2026-09-26T21:25:06.203Z\nexpires: 2026-10-10T21:25:06.203Z\n---\nStarted 2026-09-26T21:25:00.449Z, ended 2026-09-26T21:25:06.203Z.\nNo files edited.\nRan 1 command(s).\nyandecode tools: code_search ×1, ctx_run ×1, memory_write ×1.\n",
+    "---\nid: 20260926-sessions-use-opaque-tokens-not-jwt\ntitle: \"Sessions use opaque tokens, not JWT\"\nkind: decision\ndurability: durable\ncreated: 2026-09-26T21:25:01.977Z\nupdated: 2026-09-26T21:25:01.977Z\nsources: [docs/adr/001-opaque-tokens.md]\n---\nLogout must revoke immediately; see the ADR.\n"
+  ]
+}

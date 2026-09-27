@@ -1,0 +1,6 @@
+fn main() {
+    let mut v: Vec<i64> = Vec::new();
+    v.push(1);
+    let r = v.index_mut(0);
+    print(v.len());
+}

@@ -1,0 +1,6 @@
+fn main() {
+    print(0xFF);
+    print(0o17);
+    print(0b1010);
+    print(1_000_000);
+}

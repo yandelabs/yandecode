@@ -1,0 +1,102 @@
+{
+  "version": "0.1.1 (v0 hybrid RAG: arctic-embed-xs + usearch + FTS5 + RRF)",
+  "fixture": "fixtures/repo-auth",
+  "commit": "73046d7",
+  "quality": {
+    "timestamp": "2026-09-26T20:23:36.796Z",
+    "modelLoadMs": 948,
+    "embedThroughputChunksPerSecond": 253.33333333333331,
+    "fullIndexMs": 225,
+    "incrementalNoopMs": 20,
+    "queryLatencyMsP50": 7,
+    "queryLatencyMsP95": 13,
+    "queryLatencyMsP99": 15,
+    "rssBytes": 401805312,
+    "vectorIndexBytes": 11872,
+    "recallAt1": 0.4166666666666667,
+    "recallAt5": 0.6666666666666666,
+    "recallAt10": 0.9166666666666666,
+    "mrr": 0.5083333333333333
+  },
+  "tokenSavings": {
+    "timestamp": "2026-09-26T20:23:43.542Z",
+    "ragLimit": 5,
+    "perQuery": [
+      {
+        "query": "where is JWT validation performed?",
+        "baselineTokens": 588,
+        "ragTokens": 457,
+        "savingsPct": 22.278911564625847
+      },
+      {
+        "query": "how are user passwords hashed and verified",
+        "baselineTokens": 356,
+        "ragTokens": 351,
+        "savingsPct": 1.4044943820224698
+      },
+      {
+        "query": "integration test for login",
+        "baselineTokens": 1174,
+        "ragTokens": 433,
+        "savingsPct": 63.1175468483816
+      },
+      {
+        "query": "why opaque tokens instead of JWT",
+        "baselineTokens": 208,
+        "ragTokens": 389,
+        "savingsPct": -87.01923076923077
+      },
+      {
+        "query": "where are session tokens created and revoked",
+        "baselineTokens": 389,
+        "ragTokens": 389,
+        "savingsPct": 0
+      },
+      {
+        "query": "how does SSO login create or find a user",
+        "baselineTokens": 427,
+        "ragTokens": 433,
+        "savingsPct": -1.4051522248243575
+      },
+      {
+        "query": "what HTTP status code is returned for invalid credentials",
+        "baselineTokens": 167,
+        "ragTokens": 411,
+        "savingsPct": -146.10778443113773
+      },
+      {
+        "query": "how does the router dispatch a request to a handler",
+        "baselineTokens": 265,
+        "ragTokens": 284,
+        "savingsPct": -7.169811320754715
+      },
+      {
+        "query": "where is the logout endpoint handled",
+        "baselineTokens": 781,
+        "ragTokens": 284,
+        "savingsPct": 63.63636363636363
+      },
+      {
+        "query": "default session ttl configuration",
+        "baselineTokens": 210,
+        "ragTokens": 443,
+        "savingsPct": -110.95238095238096
+      },
+      {
+        "query": "project overview and module layout",
+        "baselineTokens": 261,
+        "ragTokens": 411,
+        "savingsPct": -57.47126436781609
+      },
+      {
+        "query": "how are SSO tokens signed in tests",
+        "baselineTokens": 1174,
+        "ragTokens": 433,
+        "savingsPct": 63.1175468483816
+      }
+    ],
+    "totalBaselineTokens": 6000,
+    "totalRagTokens": 4718,
+    "totalSavingsPct": 21.366666666666667
+  }
+}

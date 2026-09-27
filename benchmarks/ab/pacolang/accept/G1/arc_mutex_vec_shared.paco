@@ -1,0 +1,14 @@
+fn fill(shared: Arc<Mutex<Vec<string>>>) {
+    let mut items: Vec<string> = Vec::new();
+    items.push("one");
+    shared.get().set(items);
+}
+
+fn main() {
+    let shared: Arc<Mutex<Vec<string>>> = Arc::new(Mutex::new(Vec::new()));
+    let other = shared.clone();
+    let h = spawn fill(other);
+    let done = h.join();
+    let v: Vec<string> = shared.get().lock();
+    print(v.len());
+}
