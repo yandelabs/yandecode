@@ -1,0 +1,49 @@
+{
+  "name": "yandecode",
+  "version": "0.2.0",
+  "description": "YandeCode \u2014 modular context harness for Claude Code: code navigation, context isolation, memory, workflows and guards, installed once and chosen per project",
+  "license": "MIT",
+  "author": "Yande Labs",
+  "type": "module",
+  "keywords": [
+    "claude-code",
+    "mcp",
+    "context",
+    "code-navigation",
+    "retrieval",
+    "developer-tools",
+    "ai",
+    "agents"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "bin": {
+    "yandecode": "./dist/bin.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yandelabs/yandecode.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/yandelabs/yandecode#readme",
+  "bugs": {
+    "url": "https://github.com/yandelabs/yandecode/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {},
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "better-sqlite3": "^13.0.3",
+    "commander": "^15.0.0",
+    "ignore": "^7.0.9",
+    "tree-sitter-wasms": "0.1.13",
+    "web-tree-sitter": "0.20.8",
+    "zod": "^4.6.5"
+  }
+}

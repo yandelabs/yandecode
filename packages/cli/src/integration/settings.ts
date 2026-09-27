@@ -1,0 +1,56 @@
+type HookCommand = { type: string; command: string; timeout?: number };
+type HookGroup = { matcher?: string; hooks: HookCommand[] };
+
+const YANDECODE_HOOK = /\byandecode hook (\w+)\b/;
+
+function isYandecodeGroup(group: unknown): boolean {
+  if (typeof group !== 'object' || group === null) return false;
+  const hooks = (group as HookGroup).hooks;
+  return (
+    Array.isArray(hooks) && hooks.length > 0 && hooks.every((h) => YANDECODE_HOOK.test(h.command))
+  );
+}
+
+export function removeHooks(settings: Record<string, unknown>): Record<string, unknown> {
+  const hooks = (settings.hooks ?? {}) as Record<string, unknown[]>;
+  const cleaned: Record<string, unknown[]> = {};
+  for (const [event, groups] of Object.entries(hooks)) {
+    const kept = groups.filter((g) => !isYandecodeGroup(g));
+    if (kept.length > 0) cleaned[event] = kept;
+  }
+  const next: Record<string, unknown> = { ...settings };
+  if (Object.keys(cleaned).length > 0) next.hooks = cleaned;
+  else delete next.hooks;
+  return next;
+}
+
+export function mergeHooks(
+  settings: Record<string, unknown>,
+  entries: Record<string, unknown[]>,
+): Record<string, unknown> {
+  const base = removeHooks(settings);
+  const hooks = { ...((base.hooks ?? {}) as Record<string, unknown[]>) };
+  for (const [event, groups] of Object.entries(entries)) {
+    hooks[event] = [...(hooks[event] ?? []), ...groups];
+  }
+  return { ...base, hooks };
+}
+
+const YANDECODE_STATUSLINE = /\byandecode statusline\b/;
+
+function isYandecodeStatusLine(value: unknown): boolean {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    typeof (value as { command?: unknown }).command === 'string' &&
+    YANDECODE_STATUSLINE.test((value as { command: string }).command)
+  );
+}
+
+/** Removes the status line yandecode 0.1 installed; a status line the user set is kept. */
+export function removeStatusLine(settings: Record<string, unknown>): Record<string, unknown> {
+  if (!isYandecodeStatusLine(settings.statusLine)) return settings;
+  const next = { ...settings };
+  delete next.statusLine;
+  return next;
+}
