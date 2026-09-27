@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+    "paths": {
+      "@yandecode/core": ["./packages/core/src/index.ts"],
+      "@yandecode/retrieval": ["./packages/retrieval/src/index.ts"],
+      "@core/*": ["./packages/core/src/*"],
+      "@retrieval/*": ["./packages/retrieval/src/*"],
+      "@cli/package.json": ["./packages/cli/package.json"],
+      "@cli/*": ["./packages/cli/src/*"]
+    }
+  },
+  "include": [
+    "packages/*/src",
+    "packages/*/test",
+    "scripts",
+    "benchmarks",
+    "*.config.ts",
+    "eslint.config.js"
+  ],
+  "exclude": ["**/dist", "benchmarks/rag/token-savings.ts"]
+}

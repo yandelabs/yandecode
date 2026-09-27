@@ -1,0 +1,10 @@
+dist
+node_modules
+.yandecode
+package-lock.json
+.superpowers
+.ralph
+CLAUDE.md
+benchmarks/rag/token-savings.ts
+yandecode.json
+.mcp.json

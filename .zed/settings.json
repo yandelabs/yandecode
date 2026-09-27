@@ -1,0 +1,14 @@
+{
+  "format_on_save": "on",
+  "formatter": {
+    "external": { "command": "npx", "arguments": ["prettier", "--stdin-filepath", "{buffer_path}"] }
+  },
+  "languages": {
+    "TypeScript": { "language_servers": ["vtsls", "eslint", "!typescript-language-server"] }
+  },
+  "lsp": {
+    "vtsls": { "settings": { "typescript": { "tsdk": "node_modules/typescript/lib" } } },
+    "eslint": { "settings": { "workingDirectories": ["./"] } }
+  },
+  "file_scan_exclusions": ["**/node_modules", "**/dist", ".yandecode"]
+}
